@@ -12,6 +12,10 @@ TARGET = GUIDuplicateSearch
 TEMPLATE = app
 
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    dupsearchmainwindow.cpp \
+    leftwidget.cpp
 
-HEADERS  +=
+HEADERS  += \
+    dupsearchmainwindow.h \
+    leftwidget.h
