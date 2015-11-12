@@ -14,8 +14,10 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     dupsearchmainwindow.cpp \
-    leftwidget.cpp
+    leftwidget.cpp \
+    filesystemtraverserthread.cpp
 
 HEADERS  += \
     dupsearchmainwindow.h \
-    leftwidget.h
+    leftwidget.h \
+    filesystemtraverserthread.h

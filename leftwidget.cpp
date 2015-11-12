@@ -25,6 +25,8 @@ LeftWidget::LeftWidget(QWidget *parent) : QWidget(parent)
 
     p_vbox_layout->addWidget(p_tool_box);
     setLayout(p_vbox_layout);
+
+    thread_ = new FileSystemTraverserThread(this);
 }
 
 void LeftWidget::slot_set_init_path()
