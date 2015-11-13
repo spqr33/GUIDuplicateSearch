@@ -45,4 +45,6 @@ void LeftWidget::slot_set_init_path()
     QModelIndex root_index = p_fs_model_->index(init_path_);
     p_fs_view_->setRootIndex(root_index);
 
+    thread_->traverse(init_path_);
+
 }

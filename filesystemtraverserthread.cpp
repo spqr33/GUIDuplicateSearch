@@ -5,6 +5,7 @@
 #include <QQueue>
 #include <QFileInfoList>
 #include <QScopedPointer>
+#include <QDebug>
 
 FileSystemTraverserThread::FileSystemTraverserThread(QObject* parrent) :
     QThread(parrent)
@@ -24,10 +25,11 @@ FileSystemTraverserThread::~FileSystemTraverserThread()
     wait();
 }
 
-void FileSystemTraverserThread::traverse(const QString& initPath) {
+void FileSystemTraverserThread::traverse(const QString& initPath, const QString& tag) {
     QMutexLocker locker(&mutex_);
     // Set start information here
-    path_ = initPath;
+    path_   =   initPath;
+    tag_    =   tag;
     //
 
     if(!isRunning()) {
@@ -43,9 +45,10 @@ void FileSystemTraverserThread::run()
     forever {
         mutex_.lock();
         QString path = path_;
+        QString tag = tag_;
         mutex_.unlock();
 
-        //TODO reset FileMetaDataHolder + its mutex
+        QSharedPointer<FilesInfoHolder> spInfoHolder(new FilesInfoHolder());
 
         QQueue<QSharedPointer<QDir> > q;
         q.push_back(QSharedPointer<QDir>(new QDir(path)));
@@ -79,13 +82,20 @@ void FileSystemTraverserThread::run()
                         q.enqueue(spDir);
                     }
                     if (iter->isFile()) {
-                        // Put it into holder.
+                        const QString   fileName = iter->absoluteFilePath();
+                        quint64         size = iter->size();
+                        FileInfo* f = new FileInfo(fileName, size, tag);
+
+                        spInfoHolder->add(QSharedPointer<FileInfo>(f));
+                        //qDebug() << iter->absoluteFilePath();
                     }
                 }
             }
         } while(!q.empty());
 
-      /////////
+        emit filesInfoHolderBuilded(spInfoHolder);
+
+        /////////
         mutex_.lock();
         while(restart_ == false)
             waitCondition_.wait(&mutex_);

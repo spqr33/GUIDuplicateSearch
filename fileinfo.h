@@ -11,7 +11,7 @@ public:
     FileInfo(const QString& fullname, quint64 size, const QString& tag);
 
     const QString&  fullName() const    { return fullName_;}
-    quint64         size() const        { return size; }
+    quint64         size() const        { return size_; }
     const QString&  tag() const         { return tag_; }
 
     void            setHash(QSharedPointer<AbstractHash> spHash);
