@@ -34,6 +34,7 @@ void SameSizeWidget::setStubModel(const QString& text)
 
 void SameSizeWidget::slot_generateSameSizeHolder(QSharedPointer<FilesInfoHolder> spFilesInfoHolder)
 {
+    setStubModel(QString(tr("Generating, please wait...")));
     thread_->build(spFilesInfoHolder);
 }
 
