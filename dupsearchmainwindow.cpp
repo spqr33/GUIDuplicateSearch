@@ -10,10 +10,15 @@ DuplicateSearchMainWindow::DuplicateSearchMainWindow(QWidget *parent)
 {
     p_container_ = new QWidget;
     p_left_widget_ = new LeftWidget;
+    p_same_size_widget_ = new SameSizeWidget;
+    connect(p_left_widget_, SIGNAL(filesInfoHolderBuilded(QSharedPointer<FilesInfoHolder>)),
+            p_same_size_widget_, SLOT(slot_generateSameSizeHolder(QSharedPointer<FilesInfoHolder>))
+            );
 
     QHBoxLayout*    p_hbox_lay = new QHBoxLayout;
 
     p_hbox_lay->addWidget(p_left_widget_);
+    p_hbox_lay->addWidget(p_same_size_widget_);
 
     p_container_->setLayout(p_hbox_lay);
     setCentralWidget(p_container_);

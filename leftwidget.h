@@ -20,8 +20,11 @@ public:
 
 signals:
     void directory_loaded(const QString&);
+    void filesInfoHolderBuilded(QSharedPointer<FilesInfoHolder>);
+
 public slots:
     void slot_set_init_path();
+    void slot_stub(QSharedPointer<FilesInfoHolder>);
 };
 
 #endif // LEFTWIDGET_H

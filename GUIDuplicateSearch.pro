@@ -12,17 +12,24 @@ TARGET = GUIDuplicateSearch
 TEMPLATE = app
 
 QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra -pedantic
+CONFIG += -std=c++11
 
 SOURCES += main.cpp \
     dupsearchmainwindow.cpp \
     leftwidget.cpp \
     filesystemtraverserthread.cpp \
     filesinfoholder.cpp \
-    fileinfo.cpp
+    fileinfo.cpp \
+    samesizewidget.cpp \
+    samesizeholderbuild_thread.cpp \
+    samesizeholder.cpp
 
 HEADERS  += \
     dupsearchmainwindow.h \
     leftwidget.h \
     filesystemtraverserthread.h \
     filesinfoholder.h \
-    fileinfo.h
+    fileinfo.h \
+    samesizewidget.h \
+    samesizeholderbuild_thread.h \
+    samesizeholder.h

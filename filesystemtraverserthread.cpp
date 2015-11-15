@@ -12,6 +12,10 @@ FileSystemTraverserThread::FileSystemTraverserThread(QObject* parrent) :
 {
     restart_ = false;
     abort_  = false;
+    if (parrent != 0){
+        connect(this, SIGNAL(filesInfoHolderBuilded(QSharedPointer<FilesInfoHolder>)),
+                parrent, SIGNAL(filesInfoHolderBuilded(QSharedPointer<FilesInfoHolder>)));
+    }
 }
 
 FileSystemTraverserThread::~FileSystemTraverserThread()
@@ -92,9 +96,9 @@ void FileSystemTraverserThread::run()
                 }
             }
         } while(!q.empty());
-
+        qDebug() << " emitting filesInfoHolderBuilded(spInfoHolder)";
         emit filesInfoHolderBuilded(spInfoHolder);
-
+        qDebug() << " was emitted filesInfoHolderBuilded(spInfoHolder)";
         /////////
         mutex_.lock();
         while(restart_ == false)
