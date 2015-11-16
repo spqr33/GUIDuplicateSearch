@@ -8,11 +8,14 @@
 #include <QMutex>
 #include <QObject>
 //#include "samesizewidget.h"
+//#include "samesizeholderbuild_thread.h"
 
 class SameSizeHolder : public QObject
 {
     Q_OBJECT
+    friend class SameSizeHolderBuildThread;
     friend class SameSizeWidget;
+    friend class DuplicatesBuildThread;
 public:
     typedef quint64 fileSize;
     typedef QMap< fileSize, QList<QSharedPointer<FileInfo> > > HolderType;

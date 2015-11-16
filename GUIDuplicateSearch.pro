@@ -13,6 +13,7 @@ TEMPLATE = app
 
 QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra -pedantic
 CONFIG += -std=c++11
+LIBS += -Bdynamic -lcrypto -lssl
 
 SOURCES += main.cpp \
     dupsearchmainwindow.cpp \
@@ -22,7 +23,12 @@ SOURCES += main.cpp \
     fileinfo.cpp \
     samesizewidget.cpp \
     samesizeholderbuild_thread.cpp \
-    samesizeholder.cpp
+    samesizeholder.cpp \
+    duplicateswidget.cpp \
+    duplicatesholder.cpp \
+    duplicatesbuild_thread.cpp \
+    md5hash.cpp \
+    abstracthash.cpp
 
 HEADERS  += \
     dupsearchmainwindow.h \
@@ -32,4 +38,9 @@ HEADERS  += \
     fileinfo.h \
     samesizewidget.h \
     samesizeholderbuild_thread.h \
-    samesizeholder.h
+    samesizeholder.h \
+    duplicateswidget.h \
+    duplicatesholder.h \
+    duplicatesbuild_thread.h \
+    abstracthash.h \
+    md5hash.h

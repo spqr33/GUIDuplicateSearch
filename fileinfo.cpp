@@ -6,3 +6,8 @@ FileInfo::FileInfo(const QString& fullname, quint64 size, const QString& tag) :
 
 }
 
+void FileInfo::setHash(QSharedPointer<AbstractHash> spHash)
+{
+    spHash_ = spHash;
+}
+

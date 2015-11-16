@@ -1,7 +1,7 @@
 #ifndef FILEINFO_H
 #define FILEINFO_H
 #include <QSharedPointer>
-
+#include "md5hash.h"
 
 class AbstractHash;
 

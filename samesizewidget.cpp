@@ -43,8 +43,8 @@ void SameSizeWidget::slot_setModel(QSharedPointer<SameSizeHolder> spSameSizeHold
     QSharedPointer<QStandardItemModel>  spSameSizeModel(
                 new QStandardItemModel(spSameSizeHolder->holder_.size(), 2)
                 );
-    auto iter = spSameSizeHolder->holder_.begin();
-    auto iterEnd = spSameSizeHolder->holder_.end();
+    auto iter = spSameSizeHolder->holder_.cbegin();
+    auto iterEnd = spSameSizeHolder->holder_.cend();
 
     for ( quint32 counter = 0; iter != iterEnd; ++iter, ++counter ) {
         QModelIndex index = spSameSizeModel->index(counter, 0);
@@ -53,8 +53,8 @@ void SameSizeWidget::slot_setModel(QSharedPointer<SameSizeHolder> spSameSizeHold
         spSameSizeModel->insertRows(0, iter.value().size(), index);
         spSameSizeModel->insertColumns(0, 2, index);
 
-        auto iterList    = iter.value().begin(); //
-        auto iterListEnd = iter.value().end();
+        auto iterList    = iter.value().cbegin(); //
+        auto iterListEnd = iter.value().cend();
 
         for ( quint32 row = 0; iterList != iterListEnd; ++iterList, ++row ) {
             QModelIndex j0 = spSameSizeModel->index(row, 0, index);
@@ -67,6 +67,8 @@ void SameSizeWidget::slot_setModel(QSharedPointer<SameSizeHolder> spSameSizeHold
 
     spSameSizeModel_ = spSameSizeModel;
     spSameSizeHolder_ = spSameSizeHolder;
+
+    emit sameSizeHolderBuilt(spSameSizeHolder);
 
     spSameSizeModel_->setHorizontalHeaderLabels(QStringList() << "Absolute path" << "Tag");
     p_view_->setModel(spSameSizeModel_.data());

@@ -9,6 +9,7 @@
 #include "samesizeholder.h"
 
 class FilesInfoHolder;
+class SameSizeHolder;
 
 class SameSizeHolderBuildThread : public QThread
 {

@@ -57,7 +57,7 @@ void SameSizeHolderBuildThread::run()
                 for ( quint64 sameSizeCounter = 0; iter2 != iterEnd; sameSizeCounter = 0 ) {
                     mutex_.lock();
                     if (restart_) break;
-                    if (abort_) break;
+                    if (abort_) return;
                     mutex_.unlock();
 
                     while (iter2 != iterEnd) {
