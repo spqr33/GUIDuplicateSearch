@@ -67,7 +67,7 @@ void DuplicatesBuildThread::run()
 
                 if ( res == true ) {
                     spFileInfo->setHash(spHash);
-                    qDebug() <<  spHash->getDigest();
+                    //qDebug() <<  spHash->getDigest();
                     spDupHolder->addPair(spHash->getDigest(), spFileInfo);
                 }
             }

@@ -27,6 +27,7 @@ public:
 public slots:
     void slot_generateDuplicatesHolder(QSharedPointer<SameSizeHolder> spSameSizeHolder);
     void slot_setStubModel(const QString& stubText);
+    void slot_setModel(QSharedPointer<DuplicatesHolder>);
 };
 
 #endif // DUPLICATESWIDGET_H

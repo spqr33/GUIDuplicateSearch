@@ -8,10 +8,12 @@
 #include <duplicatesbuild_thread.h>
 
 class DuplicatesBuildThread;
+class DuplicatesWidget;
 
 class DuplicatesHolder
 {
     friend class DuplicatesBuildThread;
+    friend class DuplicatesWidget;
 public:
     typedef QMap< QString, QList<QSharedPointer<FileInfo> > > HolderType;
 
