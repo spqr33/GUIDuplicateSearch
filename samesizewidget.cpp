@@ -32,6 +32,11 @@ void SameSizeWidget::setStubModel(const QString& text)
     p_view_->setModel(&stubModel_);
 }
 
+void SameSizeWidget::slot_setWaitingMessage()
+{
+    setStubModel(QString(tr("Generating, please wait...")));
+}
+
 void SameSizeWidget::slot_generateSameSizeHolder(QSharedPointer<FilesInfoHolder> spFilesInfoHolder)
 {
     setStubModel(QString(tr("Generating, please wait...")));
@@ -40,6 +45,14 @@ void SameSizeWidget::slot_generateSameSizeHolder(QSharedPointer<FilesInfoHolder>
 
 void SameSizeWidget::slot_setModel(QSharedPointer<SameSizeHolder> spSameSizeHolder)
 {
+    if ( spSameSizeHolder->holder_.size() == 0 ) {
+        setStubModel(QString(tr("The are not same size files")));
+        spSameSizeHolder_.reset();
+        spSameSizeModel_.reset();
+
+        return;
+    }
+
     QSharedPointer<QStandardItemModel>  spSameSizeModel(
                 new QStandardItemModel(spSameSizeHolder->holder_.size(), 2)
                 );

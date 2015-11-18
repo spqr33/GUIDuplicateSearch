@@ -12,6 +12,7 @@ DuplicateSearchMainWindow::DuplicateSearchMainWindow(QWidget *parent)
     p_left_widget_ = new LeftWidget;
     p_same_size_widget_ = new SameSizeWidget;
     p_dup_widget_ = new DuplicatesWidget;
+
     connect(p_left_widget_, SIGNAL(filesInfoHolderBuilded(QSharedPointer<FilesInfoHolder>)),
             p_same_size_widget_, SLOT(slot_generateSameSizeHolder(QSharedPointer<FilesInfoHolder>))
             );
@@ -46,6 +47,8 @@ void DuplicateSearchMainWindow::generate_menu()
 
     connect(p_action_select_dir, SIGNAL(triggered(bool)), p_left_widget_, SLOT(slot_set_init_path()));
     p_menu_file->addAction(p_action_select_dir);
+    connect(p_action_select_dir, SIGNAL(triggered(bool)), p_same_size_widget_, SLOT(slot_setWaitingMessage()));
+    connect(p_action_select_dir, SIGNAL(triggered(bool)), p_dup_widget_, SLOT(slot_setWaitingMessage()));
 
     menuBar()->addMenu(p_menu_file);
 }

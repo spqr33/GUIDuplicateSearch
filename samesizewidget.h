@@ -20,7 +20,6 @@ private:
     SameSizeHolderBuildThread* thread_;
 
     QStandardItemModel stubModel_;
-    void setStubModel(const QString& text);
 
     QSharedPointer<QStandardItemModel>  spSameSizeModel_;
     QSharedPointer<SameSizeHolder>      spSameSizeHolder_;
@@ -29,6 +28,8 @@ public:
 signals:
     void sameSizeHolderBuilt(QSharedPointer<SameSizeHolder>);
 public slots:
+    void setStubModel(const QString& text);
+    void slot_setWaitingMessage();
     void slot_generateSameSizeHolder(QSharedPointer<FilesInfoHolder> spFilesInfoHolder);
     void slot_setModel(QSharedPointer<SameSizeHolder>);
 };

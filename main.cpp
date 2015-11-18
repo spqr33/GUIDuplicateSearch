@@ -14,10 +14,11 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     DuplicateSearchMainWindow mainWindow;
 
-
     qRegisterMetaType<QSharedPointer<FilesInfoHolder> >();
     qRegisterMetaType<QSharedPointer<SameSizeHolder> >();
     qRegisterMetaType<QSharedPointer<DuplicatesHolder> >();
+
+    QObject::connect(&mainWindow, SIGNAL(destroyed(QObject*)), qApp, SLOT(quit()));
 
     mainWindow.show();
 

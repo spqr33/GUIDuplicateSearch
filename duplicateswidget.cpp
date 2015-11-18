@@ -33,9 +33,22 @@ void DuplicatesWidget::slot_setStubModel(const QString &stubText)
     stubModel_.setData(index, stubText);
     p_tree_view_->setModel(&stubModel_);
 }
+
+void DuplicatesWidget::slot_setWaitingMessage()
+{
+    slot_setStubModel(QString(tr("Generating, please wait...")));
+}
 void DuplicatesWidget::slot_setModel(QSharedPointer<DuplicatesHolder> spDupHolder) {
     qDebug() << "<<<<<Generate Duplicate Model>>>>>>>";
-     p_tree_view_->setSortingEnabled(false);
+    if ( spDupHolder->holder_.size() == 0 ) {
+        slot_setStubModel(QString(tr("The are not duplicates")));
+        spDupHolder_.reset();
+        spModel_.reset();
+
+        return;
+    }
+
+    p_tree_view_->setSortingEnabled(false);
 
     QSharedPointer<QStandardItemModel>  spDupModel(
                 new QStandardItemModel(spDupHolder->holder_.size(), 4)
