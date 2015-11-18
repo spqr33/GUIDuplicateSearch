@@ -35,6 +35,7 @@ void DuplicatesWidget::slot_setStubModel(const QString &stubText)
 }
 void DuplicatesWidget::slot_setModel(QSharedPointer<DuplicatesHolder> spDupHolder) {
     qDebug() << "<<<<<Generate Duplicate Model>>>>>>>";
+     p_tree_view_->setSortingEnabled(false);
 
     QSharedPointer<QStandardItemModel>  spDupModel(
                 new QStandardItemModel(spDupHolder->holder_.size(), 4)
@@ -72,5 +73,7 @@ void DuplicatesWidget::slot_setModel(QSharedPointer<DuplicatesHolder> spDupHolde
 
     spModel_->setHorizontalHeaderLabels(QStringList() << "Size" << "Absolute path" << "Md5 hash" << "Tag");
     p_tree_view_->setModel(spModel_.data());
+    p_tree_view_->setSortingEnabled(true);
+    p_tree_view_->sortByColumn(0, Qt::AscendingOrder);
 }
 
