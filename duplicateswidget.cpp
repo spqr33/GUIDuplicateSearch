@@ -48,7 +48,7 @@ void DuplicatesWidget::slot_setModel(QSharedPointer<DuplicatesHolder> spDupHolde
 
 
         spDupModel->insertRows(0, iter.value().size(), index);
-        spDupModel->insertColumns(0, 3, index);
+        spDupModel->insertColumns(0, 4, index);
 
         auto iterList    = iter.value().cbegin(); //
         auto iterListEnd = iter.value().cend();
