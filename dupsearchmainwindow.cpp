@@ -4,6 +4,7 @@
 #include <QMenu>
 #include <QAction>
 #include <QMenuBar>
+#include <QSplitter>
 
 DuplicateSearchMainWindow::DuplicateSearchMainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,6 +13,13 @@ DuplicateSearchMainWindow::DuplicateSearchMainWindow(QWidget *parent)
     p_left_widget_ = new LeftWidget;
     p_same_size_widget_ = new SameSizeWidget;
     p_dup_widget_ = new DuplicatesWidget;
+
+    QSplitter* p_first_hor_splitter = new QSplitter(Qt::Horizontal);
+    QSplitter* p_second_hor_splitter = new QSplitter(Qt::Horizontal);
+    p_first_hor_splitter->addWidget(p_left_widget_);
+    p_first_hor_splitter->addWidget(p_same_size_widget_);
+    p_second_hor_splitter->addWidget(p_first_hor_splitter);
+    p_second_hor_splitter->addWidget(p_dup_widget_);
 
     connect(p_left_widget_, SIGNAL(filesInfoHolderBuilded(QSharedPointer<FilesInfoHolder>)),
             p_same_size_widget_, SLOT(slot_generateSameSizeHolder(QSharedPointer<FilesInfoHolder>))
@@ -22,9 +30,10 @@ DuplicateSearchMainWindow::DuplicateSearchMainWindow(QWidget *parent)
 
     QHBoxLayout*    p_hbox_lay = new QHBoxLayout;
 
-    p_hbox_lay->addWidget(p_left_widget_);
-    p_hbox_lay->addWidget(p_same_size_widget_);
-    p_hbox_lay->addWidget(p_dup_widget_);
+    //p_hbox_lay->addWidget(p_first_hor_splitter);
+    p_hbox_lay->addWidget(p_second_hor_splitter);
+    //p_hbox_lay->addWidget(p_same_size_widget_);
+    //p_hbox_lay->addWidget(p_dup_widget_);
 
     p_container_->setLayout(p_hbox_lay);
     setCentralWidget(p_container_);
